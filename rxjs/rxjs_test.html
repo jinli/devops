@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.4.0/rxjs.umd.js"></script>
+</head>
+<body>
+    <script>
+        //[Primary Plant][Electricity:ENERGY][kWh] + [Secondary Plant][Electricity:ENERGY][kWh] + [UV Plant][Electricity:ENERGY][kWh]
+        //https://medium.com/angular-in-depth/mastering-rxjs-operators-and-functions-that-can-bite-you-when-you-dont-expect-cb2047cf5d4c
+        rxjs.forkJoin(
+            rxjs.timer(200),
+            rxjs.fromEvent(document,'click')
+        ).subscribe(function(r){
+            // this won't work, since forkJoin only emits when all inner observables complete
+            // but fromEvent only calls "next", it never completes
+            console.log('forkJoin without take operator done', r)
+        })
+
+        rxjs.forkJoin(
+            rxjs.timer(200),
+            // the take(1) operator will complete after first emit
+            // so the outer forkJoin will complete as well
+            rxjs.fromEvent(document,'click').pipe(rxjs.operators.take(1))
+        ).subscribe(function(r){
+            console.log('forkJoin with take operator done', r)
+        })
+
+        rxjs.zip(
+            // zip emit whenever all inner observables emit
+            rxjs.interval(1000),
+            rxjs.fromEvent(document,'click'),
+        ).subscribe(function(r){
+            console.log('zip done', r)
+        })
+
+        rxjs.fromEvent(document,'click')
+        .subscribe(()=>console.log('fromEvent done'))
+    </script>
+</body>
+</html>
