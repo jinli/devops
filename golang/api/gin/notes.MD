@@ -28,3 +28,6 @@ https://www.apriorit.com/dev-blog/652-virtualization-golang-c-java-for-building-
 -- A collection of web libraries for Go
 https://github.com/aerogo
 
+
+-- what Go is for
+https://willowtreeapps.com/ideas/the-pros-and-cons-of-programming-in-go

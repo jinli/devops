@@ -13,7 +13,7 @@ const (
 	// connection string in  URL format
 	// connStr = "sqlserver://user:pwd@eemdbserver?database=dbName"
 	// connection string in ADO key value pair format
-	connStr = "server=eemdbserver;user id=user;password=pwd;database=ION_EEMSystemLog"
+	connStr = "server=eemdbserver;user id=IONEEM;password=IONisgreat!;database=ION_EEMData"
 )
 
 func printValue(pval *interface{}) {
@@ -44,7 +44,7 @@ func main() {
 	}
 	defer db.Close()
 
-	rows, err := db.Query("select value, displayName from category")
+	rows, err := db.Query("select top 20 * from EEM_DataLog")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,6 +62,7 @@ func main() {
 	vals := make([]interface{}, len(cols))
 
 	for i := 0; i < len(cols); i++ {
+		// another option is to use sql.RawBytes
 		vals[i] = new(interface{})
 		if i != 0 {
 			fmt.Print("\t")
