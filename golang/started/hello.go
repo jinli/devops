@@ -122,22 +122,16 @@ func main() {
 	// fmt.Println("string")
 	// fmt.Println(reflect.TypeOf(js))
 
-	var (
-		m int
-		n int
-	)
+	s := "abcb"
 
-	m = 0
-	n = 1
-	avg := (m + n) / 2
-	mm := (m + n) % 2
+	isPalindrome := func(start, end int) bool {
+		for ; start <= end; start, end = start+1, end-1 {
+			if s[start] != s[end] {
+				return false
+			}
+		}
+		return true
+	}
 
-	avg1 := float64(m+n) * 0.5
-
-	pos := [2]int{0, 0}
-
-	fmt.Println(avg, mm, avg1)
-
-	pos[0]++
-	fmt.Println(pos[0] + pos[1])
+	fmt.Println(isPalindrome(1, 3))
 }
