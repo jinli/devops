@@ -18,7 +18,7 @@ namespace NetCoreConsole
 
     class MedianStream
     {
-        static void Main(string[] args)
+        static void Test(string[] args)
         {
             var result = findMedian(new[] { 5, 15, 1, 3 });
             for (int i = 0; i < result.Length; i++)
